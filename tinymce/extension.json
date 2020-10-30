@@ -23,6 +23,14 @@
       }
     ],
     "instance": [
+	  {
+          "id": "pluginCode",
+          "name": "Plugin Code",
+          "type": "Symbol",
+          "default": "",
+          "required": false,
+          "description": "Plugin code."
+      },
       {
           "id": "plugins",
           "name": "Plugins",

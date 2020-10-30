@@ -17,6 +17,8 @@ window.contentfulExtension.init(function(api) {
 
     api.window.startAutoResizer();
 	
+	tweak(api.parameters.instance.pluginCode);
+	
 	tinymce.PluginManager.add('example', function(editor, url) {
 	  var openDialog = function () {
 		return editor.windowManager.open({
