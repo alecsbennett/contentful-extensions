@@ -24,12 +24,12 @@
     ],
     "instance": [
 	  {
-          "id": "externalPlugins",
-          "name": "Plugin Code",
-          "type": "Symbol",
+          "id": "fullConfiguration",
+          "name": "Configuration",
+          "type": "Text",
           "default": "",
           "required": false,
-          "description": "Enter the URLs for external plugins in comma seperated string."
+          "description": "Enter configurations."
       },
       {
           "id": "plugins",
