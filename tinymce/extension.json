@@ -26,10 +26,10 @@
 	    {
           "id": "fullConfiguration",
           "name": "Configuration",
-          "type": "Symbol",
+          "type": "Text",
           "default": "",
           "required": false,
-          "description": "Full configuration url."
+          "description": "Full configuration or url."
       },
       {
           "id": "plugins",
