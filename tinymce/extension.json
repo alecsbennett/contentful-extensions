@@ -23,13 +23,13 @@
       }
     ],
     "instance": [
-	  {
+	    {
           "id": "fullConfiguration",
           "name": "Configuration",
           "type": "Symbol",
           "default": "",
           "required": false,
-          "description": "Enter TinyMCE configuration"
+          "description": "Enter TinyMCE configuration url"
       },
       {
           "id": "plugins",
