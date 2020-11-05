@@ -24,12 +24,12 @@
     ],
     "instance": [
 	  {
-          "id": "pluginCode",
+          "id": "externalPlugins",
           "name": "Plugin Code",
           "type": "Symbol",
           "default": "",
           "required": false,
-          "description": "Plugin code."
+          "description": "Enter the URLs for external plugins in comma seperated string."
       },
       {
           "id": "plugins",
@@ -40,12 +40,20 @@
           "description": "Space separated list of TinyMCE plugins to enable. See https://www.tiny.cloud/docs/plugins/ for more information on plugins."
       },
       {
-          "id": "toolbar",
-          "name": "Toolbar",
+          "id": "toolbar1",
+          "name": "Toolbar1",
           "type": "Symbol",
           "default": "undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist outdent intent | code",
           "required": false,
-          "description": "Specify your toolbar configuration here. To use the default toolbar, clear this field. To hide the toolbar, enter the value 'false'. See https://www.tiny.cloud/docs/configure/editor-appearance/#"
+          "description": "Specify your toolbar1 configuration here. To use the default toolbar, clear this field. To hide the toolbar, enter the value 'false'. See https://www.tiny.cloud/docs/configure/editor-appearance/#"
+      },
+      {
+        "id": "toolbar2",
+        "name": "Toolbar1",
+        "type": "Symbol",
+        "default": "undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist outdent intent | code",
+        "required": false,
+        "description": "Specify your toolbar1 configuration here. To use the default toolbar, clear this field. To hide the toolbar, enter the value 'false'. See https://www.tiny.cloud/docs/configure/editor-appearance/#"
       },
       {
           "id": "menubar",

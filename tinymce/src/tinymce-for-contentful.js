@@ -16,90 +16,62 @@ window.contentfulExtension.init(function(api) {
     var mb = tweak(api.parameters.instance.menubar);  
 
     api.window.startAutoResizer();
-	
-	tweak(api.parameters.instance.pluginCode);
-	
-	tinymce.PluginManager.add('example', function(editor, url) {
-	  var openDialog = function () {
-		return editor.windowManager.open({
-		  title: 'Example plugin',
-		  body: {
-			type: 'panel',
-			items: [
-			  {
-				type: 'input',
-				name: 'title',
-				label: 'Title'
-			  }
-			]
-		  },
-		  buttons: [
-			{
-			  type: 'cancel',
-			  text: 'Close'
-			},
-			{
-			  type: 'submit',
-			  text: 'Save',
-			  primary: true
-			}
-		  ],
-		  onSubmit: function (api) {
-			var data = api.getData();
-			// Insert content when the window form is submitted
-			editor.insertContent('Title: ' + data.title);
-			api.close();
-		  }
-		});
-	  };
-
-	  // Add a button that opens a window
-	  editor.ui.registry.addButton('example', {
-		text: 'My button',
-		onAction: function () {
-		  // Open window
-		  openDialog();
-		}
-	  });
-
-	  // Adds a menu item, which can then be included in any menu via the menu/menubar configuration
-	  editor.ui.registry.addMenuItem('example', {
-		text: 'Example plugin',
-		onAction: function() {
-		  // Open window
-		  openDialog();
-		}
-	  });
-
-	  return {
-		getMetadata: function () {
-		  return  {
-			name: 'Example plugin',
-			url: 'http://exampleplugindocsurl.com'
-		  };
-		}
-	  };
-	});
 
     tinymce.init({
       selector: "#editor",
-      plugins: p,
+      /*plugins: p,
       toolbar: tb,
-      menubar: mb,
+      menubar: mb,*/
+      plugins: 'print paste importcss searchreplace autolink directionality code visualblocks visualchars image link template ' +
+          'table charmap hr nonbreaking anchor toc advlist lists wordcount imagetools textpattern noneditable help charmap quickbars',
+      external_plugins: {
+        'flags': '/plugins/flags/plugin.min.js',
+        'cfDictionary': '/plugins/cf-dictionary/plugin.js'
+      },
+      menubar: 'edit insert view format table tools help',
+      menu: {
+        edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
+        insert: { title: 'Insert', items: 'image link template codesample inserttable | charmap hr | nonbreaking anchor toc' },
+        view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker' },
+        format: { title: 'Format', items: 'bold italic strikethrough superscript subscript codeformat | formats blockformats | removeformat' },
+        table: { title: 'Table', items: 'inserttable | cell row column | tableprops deletetable' },
+        tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | code wordcount' },
+        help: { title: 'Help', items: 'help' }
+      },
+      toolbar1: 'undo redo | bold italic strikethrough | formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  '
+       + 'numlist bullist',
+      toolbar2: 'charmap emoticons | print | insertfile image media template link anchor codesample | ltr rtl | cfTogglePreview cfDictionary',
+      toolbar_sticky: true,
+      quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+      content_style: 'div.cms-dictionary { display:inline-block; } ' 
+        + '.dictionary-preview span.cms-dictionary-preview { display: inherit; } ' + 'span.cms-dictionary-preview { display: none; } ' 
+        + '.dictionary-preview span.cms-dictionary-edit { display: none; } ' + 'span.cms-dictionary-edit { display: inherit; } ',
       min_height: 600,
       max_height: 750,
       autoresize_bottom_margin: 15,
-      resize: false,
+      resize: true,
+      statusbar: true,
+      image_advtab: true,
       image_caption: true,
       init_instance_callback : function(editor) {
         var listening = true;
 
         function getEditorContent() {
-          return editor.getContent() || '';
+
+          var c = editor.getContent() || '';
+
+          c = c.replace( /<div class="cms-dictionary">.*?<span class="cms-dictionary-edit">(.*?)<\/span><\/div>/, "$1" );
+
+          return c;
         }
 
         function getApiContent() {
-          return api.field.getValue() || '';
+
+          var c = api.field.getValue() || '';
+
+          c = c.replace( /({{ cfdictionary (.*?) \"(.*?)\" }})/, '<div class="cms-dictionary"><span class="cms-dictionary-preview">$3</span><span class="cms-dictionary-edit">$1</span></div>' );
+
+          return c;
         }
 
         function setContent(x) {
@@ -107,7 +79,9 @@ window.contentfulExtension.init(function(api) {
           var editorContent = getEditorContent();
           if (apiContent !== editorContent) {
             //console.log('Setting editor content to: [' + apiContent + ']');
-            editor.setContent(apiContent);
+            var c = apiContent.replace( /({{ cfdictionary (.*?) \"(.*?)\" }})/, '<div class="cms-dictionary"><span class="cms-dictionary-preview">$3</span><span class="cms-dictionary-edit">$1</span></div>' );
+
+            editor.setContent(c);
           }
         }
 
