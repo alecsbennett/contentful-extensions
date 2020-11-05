@@ -23,18 +23,18 @@
       }
     ],
     "instance": [
-	  {
-          "id": "externalPlugins",
-          "name": "Plugin Code",
-          "type": "Symbol",
+	    {
+          "id": "config",
+          "name": "Config",
+          "type": "Text",
           "default": "",
           "required": false,
-          "description": "Enter the URLs for external plugins in comma seperated string."
+          "description": "Enter the config for TinyMCE."
       },
       {
           "id": "plugins",
           "name": "Plugins",
-          "type": "Symbol",
+          "type": "Text",
           "default": "autoresize textpattern lists advlist a11ychecker linkchecker media mediaembed powerpaste tinymcespellchecker advcode image",
           "required": false,
           "description": "Space separated list of TinyMCE plugins to enable. See https://www.tiny.cloud/docs/plugins/ for more information on plugins."
@@ -56,12 +56,12 @@
         "description": "Specify your toolbar1 configuration here. To use the default toolbar, clear this field. To hide the toolbar, enter the value 'false'. See https://www.tiny.cloud/docs/configure/editor-appearance/#"
       },
       {
-          "id": "menubar",
-          "name": "Menubar",
-          "type": "Symbol",
-          "default": "edit view insert format",
-          "required": false,
-          "description": "Specify the menus to display here. To use the default menu bar, clear this field. To hide the menu, enter the value 'false'. See https://www.tiny.cloud/docs/configure/editor-appearance/#menubar"
+        "id": "menubar",
+        "name": "Menubar",
+        "type": "Symbol",
+        "default": "edit view insert format",
+        "required": false,
+        "description": "Specify the menus to display here. To use the default menu bar, clear this field. To hide the menu, enter the value 'false'. See https://www.tiny.cloud/docs/configure/editor-appearance/#menubar"
       }
     ]
   }
