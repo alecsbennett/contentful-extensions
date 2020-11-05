@@ -23,7 +23,7 @@
       }
     ],
     "instance": [
-	  {
+	    {
           "id": "fullConfiguration",
           "name": "Configuration",
           "type": "Symbol",
