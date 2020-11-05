@@ -23,14 +23,6 @@
       }
     ],
     "instance": [
-	    {
-          "id": "config",
-          "name": "Config",
-          "type": "Symbol",
-          "default": "",
-          "required": false,
-          "description": "Enter the config for TinyMCE."
-      },
       {
           "id": "plugins",
           "name": "Plugins",
