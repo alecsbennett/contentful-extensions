@@ -26,7 +26,7 @@
 	  {
           "id": "fullConfiguration",
           "name": "Configuration",
-          "type": "Text",
+          "type": "Symbol",
           "default": "",
           "required": false,
           "description": "Enter TinyMCE configuration"
