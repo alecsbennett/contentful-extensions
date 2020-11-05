@@ -23,13 +23,13 @@
       }
     ],
     "instance": [
-	    {
+	  {
           "id": "fullConfiguration",
           "name": "Configuration",
-          "type": "Symbol",
+          "type": "Text",
           "default": "",
           "required": false,
-          "description": "Enter TinyMCE configuration url"
+          "description": "Full configuration."
       },
       {
           "id": "plugins",
@@ -49,7 +49,7 @@
       },
       {
         "id": "toolbar2",
-        "name": "Toolbar1",
+        "name": "Toolbar2",
         "type": "Symbol",
         "default": "undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist outdent intent | code",
         "required": false,
