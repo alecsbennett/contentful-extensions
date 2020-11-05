@@ -29,7 +29,7 @@
           "type": "Text",
           "default": "",
           "required": false,
-          "description": "Enter configurations."
+          "description": "Enter TinyMCE configuration"
       },
       {
           "id": "plugins",
