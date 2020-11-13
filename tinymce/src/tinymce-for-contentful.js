@@ -1,4 +1,9 @@
+console.log(this);
+
 window.contentfulExtension.init(function(api) {
+  console.log( api );
+  console.log( window );
+
   function tinymceForContentful(api) {
     function tweak(param) {
       var t = param.trim();
@@ -11,13 +16,11 @@ window.contentfulExtension.init(function(api) {
       }
     }
 
-    var p = tweak(api.parameters.instance.plugins);
-    var tb = tweak(api.parameters.instance.toolbar);
-    var mb = tweak(api.parameters.instance.menubar);  
+    //var p = tweak(api.parameters.instance.plugins);
+    //var tb = tweak(api.parameters.instance.toolbar);
+    //var mb = tweak(api.parameters.instance.menubar);  
 
-    api.window.startAutoResizer();
-
-    tinymce.init({
+    var tinyMCEConfig = {
       selector: "#editor",
       /*plugins: p,
       toolbar: tb,
@@ -112,7 +115,54 @@ window.contentfulExtension.init(function(api) {
         var throttled = _.throttle(onEditorChange, 500, {leading: true});
         editor.on('change keyup setcontent blur', throttled);
       }
-    });
+    };
+
+    if ( api.parameters.instance.fullConfiguration && api.parameters.instance.fullConfiguration != "" )
+    {
+      // load full configuration
+      var fullConfig = api.parameters.instance.fullConfiguration;
+
+      if ( fullConfig != "http" )
+      {
+        var contentfulClient = contentful.createClient({
+				  accessToken: 'aJDaYDHmvaIcdsgIZ3cehVQDkyezeRXHqH82bRizLIE',
+				  space: '463tg7igak4f'
+				});
+
+				var ct = 'configuration';
+
+				contentfulClient.getEntries({
+					content_type: ct,
+					limit: 1000
+				}).then(function(entries) {
+          for ( var i = 0; i < entries.items.length; i++ )
+          {
+            if ( entries.items[i].fields.type == "Tinymce" && entries.items[i].fields.id.toLowerCase() == fullConfig.toLowerCase() )
+            {
+
+              var str = entries.items[i].fields.config;
+
+              var config2 = JSON.parse(str);
+
+              Object.keys(config2).forEach(key => tinyMCEConfig[key] = config2[key]);
+
+              api.window.startAutoResizer();
+
+              tinymce.init(tinyMCEConfig);
+              break;
+            }
+          }             
+				});
+      }
+    }
+    else
+    {
+      api.window.startAutoResizer();
+
+      tinymce.init(tinyMCEConfig);
+    }
+
+    
   }
 
   function loadScript(src, onload) {
